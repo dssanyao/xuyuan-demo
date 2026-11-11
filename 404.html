@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>正在跳转…</title>
+<script>
+(function(){
+  var parts = location.pathname.split('/').filter(Boolean);
+  var base = parts.length > 1 ? '/' + parts[0] : '';
+  var path = '/' + parts.slice(parts.length > 1 ? 1 : 0).join('/');
+  var q = new URLSearchParams(location.search);
+  var hash = '';
+  if (/^\/xuyuan\.html$/.test(path)) hash = '#xuyuan';
+  else if (/^\/pay\.html$/.test(path)) hash = '#pay?paylei=' + (q.get('paylei') || '0') + (q.get('id') ? '&id=' + q.get('id') : '');
+  else if (/^\/website\.html$/.test(path)) hash = '#website';
+  else if (/^\/search\.html$/.test(path)) hash = '#website?key=' + encodeURIComponent(q.get('key') || '');
+  else if (/^\/news_list\.html$/.test(path)) hash = '#news_list';
+  else if (/^\/news\.html$/.test(path)) hash = '#news' + (q.get('id') ? '?id=' + q.get('id') : '');
+  else if (/^\/opinion\.html$/.test(path)) hash = '#opinion';
+  else if (/^\/link\.html$/.test(path)) hash = '#link';
+  else if (/^\/view\/id\/(\d+)$/.test(path)) hash = '#view/' + path.match(/\d+$/)[0];
+  else hash = '#';
+  location.replace(base + '/' + hash);
+})();
+</script></head>
+<body><p>正在跳转到许愿网…</p></body></html>
